@@ -4748,6 +4748,8 @@ bool CompressGameLump( BSPHeader_t *pInBSPHeader, BSPHeader_t *pOutBSPHeader, CU
 		{
 			if ( pInGameLump[i].flags & GAMELUMPFLAG_COMPRESSED )
 			{
+				//TODO: figure this out
+/*
 #ifdef INFESTED_DLL
 				Error( "No support for compressed game lumps!\n" );
 #else
@@ -4768,6 +4770,7 @@ bool CompressGameLump( BSPHeader_t *pInBSPHeader, BSPHeader_t *pOutBSPHeader, CU
 					Warning( "Unsupported BSP: Unrecognized compressed game lump\n" );
 				}
 #endif
+*/
 			}
 			else
 			{
@@ -4904,7 +4907,8 @@ bool RepackBSP( CUtlBuffer &inputBuffer, CUtlBuffer &outputBuffer, CompressFunc_
 			unsigned int newOffset = AlignBuffer( outputBuffer, alignment );
 
 			CUtlBuffer inputBuffer;
-#ifndef INFESTED_DLL
+			//TODO: figure this out
+#ifdef INFESTED_DLL
 			if ( pSortedLump->pLump->uncompressedSize )
 			{
 				byte *pCompressedLump = ((byte *)pInBSPHeader) + pSortedLump->pLump->fileofs;
@@ -4981,7 +4985,8 @@ bool RepackBSP( CUtlBuffer &inputBuffer, CUtlBuffer &outputBuffer, CompressFunc_
 			else
 			{
 				CUtlBuffer compressedBuffer;
-#ifdef INFESTED_DLL
+				//TODO: Figure this out
+#ifndef INFESTED_DLL
 				Assert( !pCompressFunc );
 #else
 				bool bCompressed = pCompressFunc ? pCompressFunc( inputBuffer, compressedBuffer ) : false;

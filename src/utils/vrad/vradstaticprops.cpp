@@ -27,9 +27,9 @@
 #include "pacifier.h"
 #include "materialsystem/imaterial.h"
 #include "materialsystem/hardwareverts.h"
-#ifndef NO_PROP_LIGHTMAPS
-#include "materialsystem/hardwaretexels.h"
-#endif
+//#ifndef NO_PROP_LIGHTMAPS
+//#include "materialsystem/hardwaretexels.h"
+//#endif
 #include "byteswap.h"
 #include "mpivrad.h"
 #include "vtf/vtf.h"
