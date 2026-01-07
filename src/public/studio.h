@@ -1482,10 +1482,12 @@ inline int mstudio_modelvertexdata_t::GetGlobalTangentIndex( int i ) const
 	Assert( ( modelptr->tangentsindex % sizeof( Vector4D ) ) == 0 );
 	return ( i + ( modelptr->tangentsindex / sizeof( Vector4D ) ) );
 }
-
+#include <iostream>
 inline mstudiovertex_t *mstudio_modelvertexdata_t::Vertex( int i ) const 
 {
-	return (mstudiovertex_t *)pVertexData + GetGlobalVertexIndex( i );
+	auto temp2 = (mstudiovertex_t*)pVertexData + GetGlobalVertexIndex(i);
+	//std::cout << temp2 << std::endl;
+	return temp2;
 }
 
 inline Vector *mstudio_modelvertexdata_t::Position( int i ) const 
@@ -1545,9 +1547,10 @@ inline const thinModelVertices_t * mstudiomesh_t::GetThinVertexData( void *pMode
 	return this->pModel()->GetThinVertexData( pModelData );
 }
 
+// Returns the offset to the vertex's data in the file.
 inline int mstudio_meshvertexdata_t::GetModelVertexIndex( int i ) const
 {
-	mstudiomesh_t *meshptr = (mstudiomesh_t *)((byte *)this - offsetof(mstudiomesh_t,vertexdata)); 
+	mstudiomesh_t *meshptr = (mstudiomesh_t *)((byte *)this - offsetof(mstudiomesh_t,vertexdata)); // Pointer to owning mstuidiomesh_t.
 	return meshptr->vertexoffset + i;
 }
 
@@ -1558,7 +1561,8 @@ inline int mstudio_meshvertexdata_t::GetGlobalVertexIndex( int i ) const
 
 inline Vector *mstudio_meshvertexdata_t::Position( int i ) const 
 {
-	return modelvertexdata->Position( GetModelVertexIndex( i ) ); 
+	auto temp = modelvertexdata->Position(GetModelVertexIndex(i));;
+	return temp;
 };
 
 inline Vector *mstudio_meshvertexdata_t::Normal( int i ) const 

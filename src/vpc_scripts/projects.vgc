@@ -86,9 +86,14 @@ $Project "vbsp"
 	"utils\vbsp\vbsp.vpc"
 }
 
-$Project "vrad"
+$Project "vrad_dll"
 {
 	"utils\vrad\vrad_dll.vpc"
+}
+
+$Project "vrad"
+{
+	"utils\vrad_launcher\vrad_launcher.vpc"
 }
 
 $Project "vvis"

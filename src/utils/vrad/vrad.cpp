@@ -2898,7 +2898,8 @@ void PrintUsage( int argc, char **argv )
 	}
 #endif
 }
-
+#include "studio.h"
+bool LoadStudioModel(char const* pModelName, CUtlBuffer& buf); //temp
 int RunVRAD( int argc, char **argv )
 {
 #if defined(_MSC_VER) && ( _MSC_VER >= 1310 )
@@ -2924,6 +2925,45 @@ int RunVRAD( int argc, char **argv )
 	Q_StripExtension( argv[ i ], source, sizeof( source ) );
 	CmdLib_InitFileSystem( argv[ i ] );
 	Q_FileBase( source, source, sizeof( source ) );
+
+
+#if 0
+	//movercell: test logic here
+	CUtlBuffer modelbuffer(1000, 1000);
+	//LoadStudioModel("models/props/128_fuse_set01/128_fuse_set01.mdl", modelbuffer);
+	LoadStudioModel("models/props/128_fuse_set03/128_fuse_set03.mdl", modelbuffer);
+	//LoadStudioModel("models/anim_wp/framework/squarebeam_off_128.mdl", modelbuffer);
+	studiohdr_t* headerptr = (studiohdr_t*)modelbuffer.PeekGet();
+
+ 	std::cout << "Bodyparts: " << headerptr->numbodyparts << std::endl;
+	for (int bodypartID = 0; bodypartID < headerptr->numbodyparts; bodypartID++)
+	{
+		std::cout << "Bodypart: " << std::endl;
+		auto* bodypart = headerptr->pBodypart(bodypartID);
+		std::cout << "Bodypart model amount : " << bodypart->nummodels << std::endl;
+		for (int modelID = 0; modelID < bodypart->nummodels; modelID++) {
+			std::cout << "Model: " << std::endl;
+			auto* model = bodypart->pModel(modelID);
+			std::cout << "Vertex count: " << model->numvertices << std::endl;
+			std::cout << "Mesh count: " << model->nummeshes << std::endl;
+			auto vertexdata = model->GetVertexData((void*)headerptr);
+			std::cout << vertexdata->Vertex( 0 ) << std::endl;
+			auto tmp =  (vertexdata->Vertex( model->numvertices - 1 )->m_vecPosition);
+			std::cout << vertexdata->Vertex( model->numvertices - 1 ) << std::endl;
+
+			for (int meshID = 0; meshID < model->nummeshes; meshID++) 
+			{
+				auto* mesh = model->pMesh(meshID);
+				std::cout << "Mesh: " << std::endl;
+				std::cout << "Vertex count: " << mesh->numvertices << std::endl;
+			}
+		}
+	}
+
+	__debugbreak();
+	exit;
+#endif
+
 
 	VRAD_LoadBSP( argv[i] );
 

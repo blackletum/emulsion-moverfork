@@ -1998,7 +1998,11 @@ void CVradStaticPropMgr::AddPolysForRayTrace( void )
 									Vector position1;
 									Vector position2;
 									Vector position3;
-									VectorTransform( *vertData->Position( vertex1 ), matrix, position1 );
+									std::cout << "Amount: " << pMesh->numvertices << std::endl;
+									std::cout << "Start:  " << vertData->Position(0) << std::endl;
+									std::cout << "End:    " << vertData->Position(pMesh->numvertices) << std::endl;
+									auto tmp = *vertData->Position(vertex1);
+									VectorTransform( tmp , matrix, position1 );
 									VectorTransform( *vertData->Position( vertex2 ), matrix, position2 );
 									VectorTransform( *vertData->Position( vertex3 ), matrix, position3 );
 									unsigned short flags = 0;
