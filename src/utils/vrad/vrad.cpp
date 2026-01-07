@@ -2910,7 +2910,7 @@ int RunVRAD( int argc, char **argv )
 #endif
 */
 
-	Msg("\n        Movercell's\n        \"Valve Radiosity Simulator\"-Based\n        Radiosity Simulator \n        (" __DATE__ ")\n");
+	Msg("\n        Movercell's\n        \"Valve Radiosity Simulator\"-Based\n        Radiosity Simulator \n        (" __DATE__ ")\n\n");
 
 	verbose = true;  // Originally FALSE
 
@@ -2932,8 +2932,8 @@ int RunVRAD( int argc, char **argv )
 #if 0
 	//movercell: test logic here
 	CUtlBuffer modelbuffer(1000, 1000);
-	//LoadStudioModel("models/props/128_fuse_set01/128_fuse_set01.mdl", modelbuffer);
-	LoadStudioModel("models/props/128_fuse_set03/128_fuse_set03.mdl", modelbuffer);
+	LoadStudioModel("models/props/128_fuse_set01/128_fuse_set01.mdl", modelbuffer);
+	//LoadStudioModel("models/props/128_fuse_set03/128_fuse_set03.mdl", modelbuffer);
 	//LoadStudioModel("models/anim_wp/framework/squarebeam_off_128.mdl", modelbuffer);
 	studiohdr_t* headerptr = (studiohdr_t*)modelbuffer.PeekGet();
 

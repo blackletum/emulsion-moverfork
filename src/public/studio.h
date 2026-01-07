@@ -1417,7 +1417,7 @@ struct mstudiomesh_t
 
 	mstudio_meshvertexdata_t vertexdata;
 
-	int					unused[6]; // remove as appropriate -- 8 in asw
+	int					unused[8]; // ~~remove as appropriate -- 8 in asw~~ movercell: it probably actually is 8 dude!
 
 	mstudiomesh_t(){}
 private:
@@ -1438,6 +1438,7 @@ struct mstudiomodel_t
 
 	int					nummeshes;	
 	int					meshindex;
+	//inline mstudiomesh_t *pMesh( int i ) const { return (mstudiomesh_t*)((((byte *)this) + meshindex) + ( i * 108 )); };
 	inline mstudiomesh_t *pMesh( int i ) const { return (mstudiomesh_t *)(((byte *)this) + meshindex) + i; };
 
 	// cache purposes
