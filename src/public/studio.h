@@ -1438,7 +1438,6 @@ struct mstudiomodel_t
 
 	int					nummeshes;	
 	int					meshindex;
-	//inline mstudiomesh_t *pMesh( int i ) const { return (mstudiomesh_t*)((((byte *)this) + meshindex) + ( i * 108 )); };
 	inline mstudiomesh_t *pMesh( int i ) const { return (mstudiomesh_t *)(((byte *)this) + meshindex) + i; };
 
 	// cache purposes
@@ -1486,9 +1485,7 @@ inline int mstudio_modelvertexdata_t::GetGlobalTangentIndex( int i ) const
 #include <iostream>
 inline mstudiovertex_t *mstudio_modelvertexdata_t::Vertex( int i ) const 
 {
-	auto temp2 = (mstudiovertex_t*)pVertexData + GetGlobalVertexIndex(i);
-	//std::cout << temp2 << std::endl;
-	return temp2;
+	return (mstudiovertex_t*)pVertexData + GetGlobalVertexIndex(i);
 }
 
 inline Vector *mstudio_modelvertexdata_t::Position( int i ) const 
@@ -1562,8 +1559,7 @@ inline int mstudio_meshvertexdata_t::GetGlobalVertexIndex( int i ) const
 
 inline Vector *mstudio_meshvertexdata_t::Position( int i ) const 
 {
-	auto temp = modelvertexdata->Position(GetModelVertexIndex(i));;
-	return temp;
+	return modelvertexdata->Position(GetModelVertexIndex(i));
 };
 
 inline Vector *mstudio_meshvertexdata_t::Normal( int i ) const 
