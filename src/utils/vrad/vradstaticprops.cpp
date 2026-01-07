@@ -1404,6 +1404,15 @@ void CVradStaticPropMgr::ComputeLighting( CStaticProp &prop, int iThread, int pr
 			for ( int meshID = 0; meshID < pStudioModel->nummeshes; ++meshID )
 			{
 				mstudiomesh_t *pStudioMesh = pStudioModel->pMesh( meshID );
+
+				//movercell: fml
+				int ohno = 0;
+				for (int hackfix = 0; hackfix < 6; hackfix++)
+				{
+					ohno += pStudioMesh->unused[hackfix];
+				}
+				if (ohno > 0) continue;
+
 				const mstudio_meshvertexdata_t *vertData = pStudioMesh->GetVertexData((void *)pStudioHdr);
 
 				Assert(vertData); // This can only return NULL on X360 for now
@@ -1941,6 +1950,15 @@ void CVradStaticPropMgr::AddPolysForRayTrace( void )
 				{
 					// check if this mesh's material is in the no shadow material name list
 					mstudiomesh_t* pMesh = pStudioModel->pMesh( nMesh );
+
+					//movercell: fml
+					int ohno = 0;
+					for (int hackfix = 0; hackfix < 6; hackfix++)
+					{
+						ohno += pMesh->unused[hackfix];
+					}
+					if (ohno > 0) continue;
+
 					mstudiotexture_t *pTxtr=pStudioHdr->pTexture(pMesh->material);
 					//printf("mat idx=%d mat name=%s\n",pMesh->material,pTxtr->pszName());
 					bool bSkipThisMesh = false;
@@ -1998,11 +2016,13 @@ void CVradStaticPropMgr::AddPolysForRayTrace( void )
 									Vector position1;
 									Vector position2;
 									Vector position3;
+									/*
+									//movercell: fml
 									std::cout << "Amount: " << pMesh->numvertices << std::endl;
 									std::cout << "Start:  " << vertData->Position(0) << std::endl;
 									std::cout << "End:    " << vertData->Position(pMesh->numvertices) << std::endl;
-									auto tmp = *vertData->Position(vertex1);
-									VectorTransform( tmp , matrix, position1 );
+									auto tmp = *vertData->Position(vertex1);*/
+									VectorTransform( *vertData->Position( vertex1 ), matrix, position1 );
 									VectorTransform( *vertData->Position( vertex2 ), matrix, position2 );
 									VectorTransform( *vertData->Position( vertex3 ), matrix, position3 );
 									unsigned short flags = 0;
@@ -2152,6 +2172,15 @@ void CVradStaticPropMgr::BuildTriList( CStaticProp &prop )
 			for ( int nMesh = 0; nMesh < pStudioModel->nummeshes; ++nMesh )
 			{
 				mstudiomesh_t* pMesh = pStudioModel->pMesh( nMesh );
+
+				//movercell: fml
+				int ohno = 0;
+				for ( int hackfix = 0; hackfix < 6; hackfix++ )
+				{
+					ohno += pMesh->unused[hackfix];
+				}
+				if ( ohno > 0 ) continue;
+
 				OptimizedModel::MeshHeader_t* pVtxMesh = pVtxLOD->pMesh( nMesh );
 				const mstudio_meshvertexdata_t *vertData = pMesh->GetVertexData( (void *)pStudioHdr );
 				Assert( vertData ); // This can only return NULL on X360 for now

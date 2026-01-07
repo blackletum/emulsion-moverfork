@@ -2902,13 +2902,15 @@ void PrintUsage( int argc, char **argv )
 bool LoadStudioModel(char const* pModelName, CUtlBuffer& buf); //temp
 int RunVRAD( int argc, char **argv )
 {
+/*
 #if defined(_MSC_VER) && ( _MSC_VER >= 1310 )
 	Msg("Valve Software - vrad.exe SSE (" __DATE__ ")\n" );
 #else
 	Msg("Valve Software - vrad.exe (" __DATE__ ")\n" );
 #endif
+*/
 
-	Msg("\n      Valve Radiosity Simulator     \n");
+	Msg("\n        Movercell's\n        \"Valve Radiosity Simulator\"-Based\n        Radiosity Simulator \n        (" __DATE__ ")\n");
 
 	verbose = true;  // Originally FALSE
 
