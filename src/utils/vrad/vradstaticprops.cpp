@@ -486,16 +486,14 @@ bool LoadStudioModel( char const* pModelName, CUtlBuffer& buf )
 	// Construct the file name...
 	if (!LoadFile( pModelName, buf ))
 	{
-		Warning("Error! Unable to load model \"%s\"\n", pModelName );
-		return false;
+		Error("Error! Unable to load model \"%s\"\n", pModelName );
 	}
 
 	// Check that it's valid
 	if (strncmp ((const char *) buf.PeekGet(), "IDST", 4) &&
 		strncmp ((const char *) buf.PeekGet(), "IDAG", 4))
 	{
-		Warning("Error! Invalid model file \"%s\"\n", pModelName );
-		return false;
+		Error("Error! Invalid model file \"%s\"\n", pModelName );
 	}
 
 	studiohdr_t* pHdr = (studiohdr_t*)buf.PeekGet();
@@ -504,15 +502,13 @@ bool LoadStudioModel( char const* pModelName, CUtlBuffer& buf )
 
 	if (pHdr->version != STUDIO_VERSION)
 	{
-		Warning("Error! Invalid model version \"%s\"\n", pModelName );
-		return false;
+		Error("Error! Invalid model version \"%s\"\n", pModelName );
 	}
 
 	if (!IsStaticProp(pHdr))
 	{
-		Warning("Error! To use model \"%s\"\n"
+		Error("Error! To use model \"%s\"\n"
 			"      as a static prop, it must be compiled with $staticprop!\n", pModelName );
-		return false;
 	}
 
 	// ensure reset
