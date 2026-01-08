@@ -20,7 +20,7 @@ ipch
 *.unsuccessfulbild
 
 # DO NOT ADD .obj TO THE EXCLUDES, some are in the sdk on purpose =)
-*.obj # praying
+# praying
 
 # OSX/Linux build products
 *.mak
@@ -155,3 +155,7 @@ src/materialsystem/shaderlib/.vs/shaderlib_sdk/v17/DocumentLayout.json
 /src/fgdlib/Debug
 /src/interfaces/Debug
 /src/particles_dll/Debug
+/src/utils/vrad/Release
+/src/utils/vrad/Debug
+/src/utils/vrad_launcher/Release
+/src/utils/vrad_launcher/Debug
