@@ -17,6 +17,11 @@ $Configuration
 		$Create/UsePrecompiledHeader		"Use Precompiled Header (/Yu)"
 		$PrecompiledHeaderFile				"Debug/vrad_launcher.pch"
 	}
+
+	$Linker
+	{
+		$AdditionalDependencies	"$BASE legacy_stdio_definitions.lib"
+	}
 }
 
 $Project "Vrad_launcher"

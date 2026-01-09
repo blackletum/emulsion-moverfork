@@ -5,7 +5,6 @@
 // $NoKeywords: $
 //=============================================================================//
 
-#error use basetypes.h
 #ifndef MINMAX_H
 #define MINMAX_H
 

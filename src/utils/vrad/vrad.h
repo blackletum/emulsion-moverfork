@@ -29,7 +29,7 @@
 #include "UtlHash.h"
 #include "utlvector.h"
 #include "iincremental.h"
-#include "raytrace.h"
+#include "raytrace/raytrace_mod.h"
 
 
 #ifdef _WIN32

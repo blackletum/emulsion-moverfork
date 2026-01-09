@@ -15,6 +15,8 @@ $Configuration
 	{
 		$AdditionalIncludeDirectories		"$BASE,..\common,..\vmpi,..\vmpi\mysql\mysqlpp\include,..\vmpi\mysql\include"
 		$PreprocessorDefinitions			"$BASE;MPI;PROTECTED_THINGS_DISABLE;VRAD"
+		//$EnableEnhancedInstructionSet	"Advanced Vector Extensions 2 (X86/X64) (/arch:AVX2)"
+		$AdditionalOptions	"/WX- /O2 /arch:AVX2 $BASE"
 	}
 
 	$Linker
@@ -57,6 +59,9 @@ $Project "Vrad_dll"
 		$File	"vraddll.cpp"
 		$File	"VRadStaticProps.cpp"
 		$File	"$SRCDIR\public\zip_utils.cpp"
+		$File	"raytrace\raytrace.cpp"
+		$File	"raytrace\trace2.cpp"
+		$File	"raytrace\trace3.cpp"
 
 		$Folder	"Common Files"
 		{
@@ -100,6 +105,7 @@ $Project "Vrad_dll"
 		$File	"VRAD_DispColl.h"
 		$File	"vraddetailprops.h"
 		$File	"vraddll.h"
+		$File	"raytrace\raytrace_mod.h"
 
 		$Folder	"Common Header Files"
 		{
@@ -207,6 +213,7 @@ $Project "Vrad_dll"
 			$File	"$SRCDIR\public\vtf\vtf.h"
 			$File	"$SRCDIR\public\wadtypes.h"
 			$File	"$SRCDIR\public\worldsize.h"
+			$File	"$SRCDIR\public\minmax.h"
 		}
 	}
 
@@ -214,7 +221,6 @@ $Project "Vrad_dll"
 	{
 		$Lib bitmap
 		$Lib mathlib
-		$Lib raytrace
 		$Lib tier2
 		$Lib vmpi
 		$Lib vtf
