@@ -1847,7 +1847,7 @@ void CVradStaticPropMgr::ComputeLighting( int iThread )
 	}
 	else
 	{
-		RunThreadsOn(count, true, ThreadComputeStaticPropLighting);
+		RunThreadsOn(count, false, ThreadComputeStaticPropLighting);
 	}
 
 	// restore default

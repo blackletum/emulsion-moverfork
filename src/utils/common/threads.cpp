@@ -232,7 +232,8 @@ void RunThreadsOn( int workcnt, qboolean showpacifier, RunThreadsFn fn, void *pU
 	start = Plat_FloatTime();
 	dispatch = 0;
 	workcount = workcnt;
-	StartPacifier("");
+	if (showpacifier)
+		StartPacifier("");
 	pacifier = showpacifier;
 
 #ifdef _PROFILE
