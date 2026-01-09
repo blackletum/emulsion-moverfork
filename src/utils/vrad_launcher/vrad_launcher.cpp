@@ -5,7 +5,7 @@
 // $NoKeywords: $
 //
 //=============================================================================//
-// vrad_launcher.cpp : Defines the entry point for the console application.
+// mrad_launcher.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 
 	CommandLine()->CreateCmdLine( argc, argv );
 
-	// check whether they used the -both switch. If this is specified, vrad will be run
+	// check whether they used the -both switch. If this is specified, mrad will be run
 	// twice, once with -hdr and once without
 	int both_arg=0;
 	for(int arg=1;arg<argc;arg++)
@@ -73,9 +73,9 @@ int main(int argc, char* argv[])
 	char fullPath[512], redirectFilename[512];
 	MakeFullPath( argv[0], fullPath, sizeof( fullPath ) );
 	Q_StripFilename( fullPath );
-	Q_snprintf( redirectFilename, sizeof( redirectFilename ), "%s\\%s", fullPath, "vrad.redirect" );
+	Q_snprintf( redirectFilename, sizeof( redirectFilename ), "%s\\%s", fullPath, "mrad.redirect" );
 
-	// First, look for vrad.redirect and load the dll specified in there if possible.
+	// First, look for mrad.redirect and load the dll specified in there if possible.
 	CSysModule *pModule = NULL;
 	FILE *fp = fopen( redirectFilename, "rt" );
 	if ( fp )
@@ -88,9 +88,9 @@ int main(int argc, char* argv[])
 
 			pModule = Sys_LoadModule( dllName );
 			if ( pModule )
-				printf( "Loaded alternate VRAD DLL (%s) specified in vrad.redirect.\n", dllName );
+				printf( "Loaded alternate MRAD DLL (%s) specified in mrad.redirect.\n", dllName );
 			else
-				printf( "Can't find '%s' specified in vrad.redirect.\n", dllName );
+				printf( "Can't find '%s' specified in mrad.redirect.\n", dllName );
 		}
 		
 		fclose( fp );
@@ -107,20 +107,20 @@ int main(int argc, char* argv[])
 		// If it didn't load the module above, then use the 
 		if ( !pModule )
 		{
-			strcpy( dllName, "vrad_dll.dll" );
+			strcpy( dllName, "mrad_dll.dll" );
 			pModule = Sys_LoadModule( dllName );
 		}
 		
 		if( !pModule )
 		{
-			printf( "vrad_launcher error: can't load %s\n%s", dllName, GetLastErrorString() );
+			printf( "mrad_launcher error: can't load %s\n%s", dllName, GetLastErrorString() );
 			return 1;
 		}
 		
 		CreateInterfaceFn fn = Sys_GetFactory( pModule );
 		if( !fn )
 		{
-			printf( "vrad_launcher error: can't get factory from vrad_dll.dll\n" );
+			printf( "mrad_launcher error: can't get factory from mrad_dll.dll\n" );
 			Sys_UnloadModule( pModule );
 			return 2;
 		}
@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
 		IVRadDLL *pDLL = (IVRadDLL*)fn( VRAD_INTERFACE_VERSION, &retCode );
 		if( !pDLL )
 		{
-			printf( "vrad_launcher error: can't get IVRadDLL interface from vrad_dll.dll\n" );
+			printf( "mrad_launcher error: can't get IVRadDLL interface from mrad_dll.dll\n" );
 			Sys_UnloadModule( pModule );
 			return 3;
 		}

@@ -6,6 +6,7 @@
 
 $Macro SRCDIR		"..\.."
 $Macro OUTBINDIR	"$SRCDIR\..\game\bin"
+$Macro OUTBINNAME	"mrad_dll"
 
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 
@@ -15,7 +16,6 @@ $Configuration
 	{
 		$AdditionalIncludeDirectories		"$BASE,..\common,..\vmpi,..\vmpi\mysql\mysqlpp\include,..\vmpi\mysql\include"
 		$PreprocessorDefinitions			"$BASE;MPI;PROTECTED_THINGS_DISABLE;VRAD"
-		//$EnableEnhancedInstructionSet	"Advanced Vector Extensions 2 (X86/X64) (/arch:AVX2)"
 		$AdditionalOptions	"/WX- /O2 /arch:AVX2 $BASE"
 	}
 
